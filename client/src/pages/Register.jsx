@@ -13,7 +13,7 @@ export default function Register() {
     e.preventDefault()
     setError('')
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', { username, email, password })
+      const res = await axios.post('https://wchatapp.onrender.com/api/auth/register', { username, email, password })
       localStorage.setItem('token', res.data.token)
       localStorage.setItem('user', JSON.stringify(res.data.user))
       navigate('/')

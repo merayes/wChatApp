@@ -12,7 +12,7 @@ export default function Chat() {
   const listRef = useRef(null)
 
   useEffect(() => {
-    const socket = io('http://localhost:5000', { auth: { token } })
+    const socket = io('https://wchatapp.onrender.com', { auth: { token } })
     socketRef.current = socket
 
     socket.on('connect_error', (err) => {
