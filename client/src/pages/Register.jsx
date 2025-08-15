@@ -23,26 +23,69 @@ export default function Register() {
   }
 
   return (
-    <div style={{ maxWidth: 400, margin: '80px auto', fontFamily: 'system-ui' }}>
-      <h2>Kayıt Ol</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: 12 }}>
-          <label>Kullanıcı Adı</label>
-          <input value={username} onChange={(e) => setUsername(e.target.value)} required style={{ width: '100%' }} />
-        </div>
-        <div style={{ marginBottom: 12 }}>
-          <label>Email</label>
-          <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required style={{ width: '100%' }} />
-        </div>
-        <div style={{ marginBottom: 12 }}>
-          <label>Şifre</label>
-          <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" required style={{ width: '100%' }} />
-        </div>
-        {error && <div style={{ color: 'red', marginBottom: 12 }}>{error}</div>}
-        <button type="submit">Kayıt Ol</button>
-      </form>
-      <p style={{ marginTop: 12 }}>Zaten hesabın var mı? <Link to="/login">Giriş yap</Link></p>
-    </div>
+    <div className="max-w-sm mx-auto mt-20 font-sans">
+  <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
+    <h2 className="text-2xl font-semibold text-purple-600 mb-6">Kayıt Ol</h2>
+
+    <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Kullanıcı Adı */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Kullanıcı Adı</label>
+        <input
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+        />
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          required
+          className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+        />
+      </div>
+
+      {/* Şifre */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Şifre</label>
+        <input
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          required
+          className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+        />
+      </div>
+
+      {/* Hata Mesajı */}
+      {error && (
+        <div className="text-red-500 text-sm">{error}</div>
+      )}
+
+      {/* Buton */}
+      <button
+        type="submit"
+        className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded text-sm transition"
+      >
+        Kayıt Ol
+      </button>
+    </form>
+
+    <p className="mt-4 text-sm text-gray-600 text-center">
+      Zaten hesabın var mı?{" "}
+      <Link to="/login" className="text-purple-600 hover:underline">
+        Giriş yap
+      </Link>
+    </p>
+  </div>
+</div>
+
   )
 }
 

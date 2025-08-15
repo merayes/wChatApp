@@ -67,34 +67,81 @@ export default function Chat() {
   }
 
   return (
-    <div style={{ maxWidth: 720, margin: '20px auto', fontFamily: 'system-ui' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h2>Global Sohbet</h2>
-        <div>
-          <span style={{ marginRight: 16 }}>Merhaba, <strong>{user?.username}</strong></span>
-          <button onClick={logout}>Çıkış</button>
-        </div>
-      </div>
+    <div className="max-w-2xl mx-auto my-5 font-sans">
+  {/* Üst Bar */}
+  <div className="flex justify-between items-center bg-purple-600 text-white p-4 rounded-t-xl shadow">
+    <h2 className="text-lg font-semibold">Global Sohbet</h2>
+    <div className="flex items-center gap-4">
+      <span>Merhaba, <strong>{user?.username}</strong></span>
+      <button
+        onClick={logout}
+        className="bg-purple-800 hover:bg-purple-900 px-3 py-1 rounded text-sm transition"
+      >
+        Çıkış
+      </button>
+    </div>
+  </div>
 
-      <div style={{ marginBottom: 8, color: '#666' }}>Aktif kullanıcılar: {activeUsers.map(u => u.username).join(', ')}</div>
-      {rateMsg && <div style={{ color: 'tomato', marginBottom: 8 }}>{rateMsg}</div>}
+  {/* Aktif Kullanıcılar */}
+  <div className="text-gray-600 text-sm my-2">
+    Aktif kullanıcılar: {activeUsers.map(u => u.username).join(', ')}
+  </div>
 
-      <div ref={listRef} style={{ height: 420, border: '1px solid #ddd', borderRadius: 8, padding: 12, overflowY: 'auto', background: '#fafafa' }}>
-        {messages.map(m => (
-          <div key={m._id} style={{ marginBottom: 10 }}>
-            <div style={{ fontSize: 12, color: '#555' }}>
+  {/* Rate Limit Mesajı */}
+  {rateMsg && (
+    <div className="text-red-500 text-sm mb-2">
+      {rateMsg}
+    </div>
+  )}
+
+  {/* Mesaj Listesi */}
+  <div
+    ref={listRef}
+    className="h-[420px] border border-gray-300 rounded-lg p-3 overflow-y-auto bg-gray-50 shadow-inner flex flex-col gap-2"
+  >
+    {messages.map(m => {
+      const isOwnMessage = m.username === user?.username;
+      return (
+        <div
+          key={m._id}
+          className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'}`}
+        >
+          <div className={`max-w-[70%] rounded-lg px-3 py-2 shadow
+            ${isOwnMessage
+              ? 'bg-purple-600 text-white rounded-br-none'
+              : 'bg-gray-200 text-gray-800 rounded-bl-none'
+            }`}
+          >
+            <div className="text-xs opacity-80 mb-1">
               <strong>{m.username}</strong> · {formatTime(m.timestamp)}
             </div>
-            <div style={{ fontSize: 14 }}>{m.message}</div>
+            <div className="text-sm whitespace-pre-line">{m.message}</div>
           </div>
-        ))}
-      </div>
+        </div>
+      );
+    })}
+  </div>
 
-      <form onSubmit={sendMessage} style={{ display: 'flex', marginTop: 10, gap: 8 }}>
-        <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Mesaj yazın..." style={{ flex: 1 }} />
-        <button type="submit">Gönder</button>
-      </form>
-    </div>
+  {/* Mesaj Gönderme Alanı */}
+  <form
+    onSubmit={sendMessage}
+    className="flex mt-3 gap-2"
+  >
+    <input
+      value={input}
+      onChange={(e) => setInput(e.target.value)}
+      placeholder="Mesaj yazın..."
+      className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+    />
+    <button
+      type="submit"
+      className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm transition"
+    >
+      Gönder
+    </button>
+  </form>
+</div>
+
   )
 }
 
