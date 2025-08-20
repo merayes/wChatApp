@@ -70,7 +70,7 @@ export default function Chat() {
     <div className="max-w-2xl mx-auto my-5 font-sans">
   {/* Üst Bar */}
   <div className="flex justify-between items-center bg-purple-600 text-white p-4 rounded-t-xl shadow">
-    <h2 className="text-lg font-semibold">Global Sohbet</h2>
+    <h2 className="text-lg font-semibold">Türkiye Sohbet</h2>
     <div className="flex items-center gap-4">
       <span>Merhaba, <strong>{user?.username}</strong></span>
       <button
